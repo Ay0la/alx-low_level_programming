@@ -1,51 +1,52 @@
-#include "main.h"
-
+#include "holberton.h"
 /**
- * print_times_table - Prints a multiplication table up to param
- * @n: The number to be treated
+ * print_times_table - print times table up to input
  *
- * Return: Number matrix
+ * Description: Writes times table up to imput not exceeding 15
+ *
+ * @n: size of times table
+ *
+ * Return: Nothing
  */
+
 void print_times_table(int n)
 {
-	int x, y, z;
+	int y, x, prod;
 
-	if (n >= 0 && n <= 14)
+	if (n <= 15 && n >= 0)
 	{
-		for (x = 0; x <= n; x++)
+		for (y = 0; y <= n; y++)
 		{
-			for (y = 0; y <= n; y++)
+			for (x = 0; x <= n; x++)
 			{
-				z = x * y;
-				if (z > 99)
+				prod = (y * x);
+				if (x != 0)
 				{
 					_putchar(',');
-					_putchar(32);
-					_putchar((z / 100) + '0');
-					_putchar(((z / 10) % 10) + '0');
-					_putchar((z % 10) + '0');
+					_putchar(' ');
 				}
-				else if (z > 9)
+				if (prod < 10 && x != 0)
 				{
-					_putchar(',');
-					_putchar(32);
-					_putchar(32);
-					_putchar(((z / 10) % 10) + '0');
-					_putchar((z % 10) + '0');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar((prod % 10) + '0');
+				}
+				else if (prod >= 10 && prod < 100)
+				{
+					_putchar(' ');
+					_putchar((prod / 10) + '0');
+					_putchar((prod % 10) + '0');
+				}
+				else if (prod >= 100 && x != 0)
+				{
+					_putchar((prod / 100) + '0');
+					_putchar((prod / 10) % 10 + '0');
+					_putchar((prod % 10) + '0');
 				}
 				else
-				{
-					if (y != 0)
-					{
-						_putchar(',');
-						_putchar(32);
-						_putchar(32);
-						_putchar(32);
-					}
-					_putchar(z + '0');
-				}
+					_putchar((prod % 10) + '0');
 			}
 			_putchar('\n');
 		}
 	}
-}}
+}
