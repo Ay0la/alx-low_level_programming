@@ -1,27 +1,48 @@
 #include "main.h"
 
 /**
- * write a function that prints the binary representation of a number
- * @Y: number to print in binary
- * print_bnary - prints the equivalent of a decimal number
+ * _pow - calculates (base ^ power)
+ * @base: the base of an exponent
+ * @power: the power of an exponent
+ *
+ * Return: value of (base ^ power)
  */
-void print_binary(unsigned long int Y)
+unsigned long int _pow(unsigned int base, unsigned int power)
 {
-	int i, count = 0;
-	unsigned long int current;
+	unsigned long int num;
+	unsigned int i;
 
-	for (i = 63; i >= 0;  i--)
+	num = 1;
+	for (i = 1; i <= power; i++)
+		num *= base;
+	return (num);
+}
+
+/**
+ * print_binary - prints a number in binary notation
+ * @n: number to print
+ *
+ * Return: void
+ */
+void print_binary(unsigned long int n)
+{
+	unsigned long int divisor, check;
+	char flag;
+
+	flag = 0;
+	divisor = _pow(2, sizeof(unsigned long int) * 8 - 1);
+	while (divisor != 0)
 	{
-		current = Y >> i;
-
-		if (current & 1)
+		check = n & divisor;
+		if (check == divisor)
 		{
+			flag = 1;
 			_putchar('1');
-			count++;
 		}
-		else if (count)
+		else if (flag == 1 || divisor == 1)
+		{
 			_putchar('0');
+		}
+		divisor >>= 1;
 	}
-	if (!count)
-		_putchar('0');
 }
